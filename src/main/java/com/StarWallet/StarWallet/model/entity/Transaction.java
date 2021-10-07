@@ -47,7 +47,7 @@ public class Transaction extends BaseEntity{
     private TransactionStatus transactionStatus;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "parentTransaction")
+    @OneToMany(mappedBy = "parentTransactionId")
     private List<Transaction> transactions;
 
     @ManyToOne(cascade = CascadeType.ALL)
