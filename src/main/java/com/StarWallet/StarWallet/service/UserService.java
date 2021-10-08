@@ -8,6 +8,9 @@ import java.util.List;
 public interface UserService {
 
     User findById(long id);
+
+    void deleteUser(Long userId) throws Exception;
+
     List<User> getAllUsers();
 
     User createNewUser(CreateUser user) throws Exception;

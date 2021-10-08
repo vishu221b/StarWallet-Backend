@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
@@ -17,7 +19,7 @@ public class TransactionController {
     TransactionService transactionService;
 
     @PostMapping
-    public Transaction createTransaction(@RequestBody CreateNewTransaction createNewTransaction){
-        return transactionService.createTransaction(createNewTransaction);
+    public List<Transaction> createTransaction(@RequestBody CreateNewTransaction createNewTransaction){
+        return transactionService.createTransactions(createNewTransaction);
     }
 }

@@ -1,6 +1,7 @@
 package com.StarWallet.StarWallet.controller;
 
 import com.StarWallet.StarWallet.model.dto.ExceptionDTO;
+import com.StarWallet.StarWallet.model.exceptions.StarWalletInternalServerErrorException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceAlreadyExistsException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,10 +18,12 @@ import java.util.Date;
 @RestController
 public class ExceptionController {
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = {StarWalletInternalServerErrorException.class, Exception.class})
     public ResponseEntity<ExceptionDTO> handleException(Exception ex, WebRequest request){
         ex.printStackTrace();
-        return new ResponseEntity<>(new ExceptionDTO(ex.getMessage(),new Date().getTime()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ExceptionDTO(ex.getMessage(),
+                (ex.getClass().isInstance(StarWalletInternalServerErrorException.class))
+                    ? ((StarWalletInternalServerErrorException)ex).getEpoch() : new Date().getTime()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @ExceptionHandler(value = StarWalletResourceAlreadyExistsException.class)
     public ResponseEntity<ExceptionDTO> handleException(StarWalletResourceAlreadyExistsException ex, WebRequest request){

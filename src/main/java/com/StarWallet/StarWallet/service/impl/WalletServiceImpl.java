@@ -21,6 +21,12 @@ public class WalletServiceImpl implements WalletService {
     UserService userService;
 
     @Override
+    public void updateWalletBalance(Wallet wallet, Long newBalance) {
+        wallet.setBalanceAmount(newBalance);
+        walletRepository.save(wallet);
+    }
+
+    @Override
     public Wallet getByWalletId(String walletId) {
         return walletRepository.findByWalletId(walletId);
     }

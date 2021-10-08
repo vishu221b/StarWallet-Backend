@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TransactionService {
 
-    Transaction createTransaction(CreateNewTransaction createNewTransaction);
+    List<Transaction> createTransactions(CreateNewTransaction createNewTransaction);
 
     Transaction markTransactionInactive(Long transactionId);
 

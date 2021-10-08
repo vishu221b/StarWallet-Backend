@@ -3,11 +3,11 @@ package com.StarWallet.StarWallet.model.exceptions;
 import lombok.Data;
 
 @Data
-public class StarWalletResourceNotFoundException extends RuntimeException{
+public class StarWalletInvalidRequestException extends RuntimeException{
 
     private long epoch;
 
-    public StarWalletResourceNotFoundException(String message, long epoch){
+    public StarWalletInvalidRequestException(String message, Long epoch){
         super(message);
         this.epoch=epoch;
     }

@@ -8,9 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.id.UUIDGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -23,12 +26,11 @@ public class Transaction extends BaseEntity{
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(targetEntity = Wallet.class)
-    private Wallet payerWallet;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    private Wallet wallet;
 
-    @ManyToOne(targetEntity = Wallet.class)
-    private Wallet receiverWallet;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "transaction")
     private WalletRecharge walletRechargeDetails;
 
@@ -48,11 +50,14 @@ public class Transaction extends BaseEntity{
 
     @JsonIgnore
     @OneToMany(mappedBy = "parentTransactionId")
-    private List<Transaction> transactions;
+    private List<Transaction> childTransactions;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_transaction_id", referencedColumnName = "id")
     private Transaction parentTransactionId;
+
+    @Column(name = "transaction_context_id")
+    private String transactionContextId;
 
     @PrePersist
     public void prePersist(){

@@ -1,6 +1,7 @@
 package com.StarWallet.StarWallet.model.entity;
 
 import com.StarWallet.StarWallet.enums.RechargeStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class WalletRecharge extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private RechargeStatus rechargeStatus;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", referencedColumnName = "id")
     private Wallet wallet;
@@ -31,5 +33,11 @@ public class WalletRecharge extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transaction_id", referencedColumnName = "id")
     private Transaction transaction;
+
+    @PrePersist
+    public void prePersist(){
+        super.prePersist();
+        this.setRechargeStatus(RechargeStatus.PENDING);
+    }
 
 }

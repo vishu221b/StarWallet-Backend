@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "wallet")
@@ -29,12 +28,8 @@ public class Wallet extends BaseEntity{
     private User user;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Transaction.class, mappedBy = "payerWallet")
-    List<Transaction> paid;
-
-    @JsonIgnore
-    @OneToMany(targetEntity = Transaction.class, mappedBy = "receiverWallet")
-    List<Transaction> received;
+    @OneToMany(targetEntity = Transaction.class, mappedBy = "wallet")
+    List<Transaction> transactions;
 
     @Column(name="wallet_type")
     @Enumerated(EnumType.STRING)
@@ -45,7 +40,7 @@ public class Wallet extends BaseEntity{
 
     @JsonIgnore
     @OneToMany(mappedBy = "wallet")
-    private Set<WalletRecharge> walletRecharge;
+    private List<WalletRecharge> walletRecharge;
 
     @PrePersist
     public void prePersist(){
