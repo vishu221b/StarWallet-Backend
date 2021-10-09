@@ -1,15 +1,13 @@
 package com.StarWallet.StarWallet.service.impl;
 
 import com.StarWallet.StarWallet.constants.ErrorConstants;
-import com.StarWallet.StarWallet.model.entity.Address;
 import com.StarWallet.StarWallet.model.entity.User;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceNotFoundException;
-import com.StarWallet.StarWallet.model.request.CreateAddress;
 import com.StarWallet.StarWallet.model.request.CreateUser;
-import com.StarWallet.StarWallet.repository.AddressRepository;
 import com.StarWallet.StarWallet.repository.UserRepository;
 import com.StarWallet.StarWallet.service.AddressService;
 import com.StarWallet.StarWallet.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +16,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     AddressService addressService;
@@ -28,16 +26,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void deleteUser(Long userId) throws Exception{
+
+    public Boolean deleteUserWithId(Long userId) throws Exception{
         User user = userRepository.findById(userId).orElse(null);
         if(null == user)
             throw new StarWalletResourceNotFoundException(ErrorConstants.USER_NOT_FOUND_ERROR, new Date().getTime());
+        log.info("Marking user as inactive: " + user);
         user.setIsActive(Boolean.FALSE);
-        userRepository.save(user);
+        user = userRepository.save(user);
+        log.info("Marked user inactive: " + user);
+        return user.getIsActive();
     }
 
     @Override
     public User findById(long id) {
+        log.info("ID is:" + id);
         User user = userRepository.findById(id).orElse(null);
         if(null!=user && user.getIsActive().equals(Boolean.TRUE)){
             return user;

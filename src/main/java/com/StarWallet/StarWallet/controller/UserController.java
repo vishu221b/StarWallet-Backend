@@ -1,16 +1,18 @@
 package com.StarWallet.StarWallet.controller;
 
 import com.StarWallet.StarWallet.constants.ErrorConstants;
+import com.StarWallet.StarWallet.constants.RestConstants;
+import com.StarWallet.StarWallet.constants.UserConstants;
 import com.StarWallet.StarWallet.enums.UserType;
 import com.StarWallet.StarWallet.model.entity.User;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletInternalServerErrorException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceAlreadyExistsException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceNotFoundException;
 import com.StarWallet.StarWallet.model.request.CreateUser;
+import com.StarWallet.StarWallet.model.response.GenericResponseDTO;
 import com.StarWallet.StarWallet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,15 +56,21 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Object> deleteUserById(@PathVariable Long userId){
+    public ResponseEntity<GenericResponseDTO> deleteUserById(@PathVariable Long userId){
+        GenericResponseDTO responseDTO = new GenericResponseDTO();
         try {
-            userService.deleteUser(userId);
+            Boolean userStatus = userService.deleteUserWithId(userId);
+            if(!userStatus){
+                responseDTO.setStatus(RestConstants.SUCCESS);
+                responseDTO.setMessage(UserConstants.USER_DELETED_SUCCESSFULLY);
+            }else{
+                responseDTO.setStatus(RestConstants.FAILURE);
+                responseDTO.setMessage(UserConstants.COULD_NOT_DELETE_USER);
+            }
         } catch (Exception e){
             e.printStackTrace();
             throw new StarWalletInternalServerErrorException(e.getMessage(), new Date().getTime());
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Message", "User deleted Successfully.");
-        return ResponseEntity.ok().headers(headers).build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseDTO);
     }
 }

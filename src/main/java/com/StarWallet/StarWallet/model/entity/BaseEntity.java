@@ -3,11 +3,13 @@ package com.StarWallet.StarWallet.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass

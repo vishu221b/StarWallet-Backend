@@ -1,6 +1,5 @@
 package com.StarWallet.StarWallet.controller;
 
-import com.StarWallet.StarWallet.model.entity.Wallet;
 import com.StarWallet.StarWallet.model.entity.WalletRecharge;
 import com.StarWallet.StarWallet.model.request.CreateWalletRecharge;
 import com.StarWallet.StarWallet.service.WalletRechargeService;

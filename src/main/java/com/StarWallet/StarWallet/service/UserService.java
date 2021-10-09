@@ -9,7 +9,7 @@ public interface UserService {
 
     User findById(long id);
 
-    void deleteUser(Long userId) throws Exception;
+    Boolean deleteUserWithId(Long userId) throws Exception;
 
     List<User> getAllUsers();
 

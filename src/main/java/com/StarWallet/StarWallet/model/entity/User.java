@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(callSuper = true)
 @Table(name = "star_wallet_user")
 @NoArgsConstructor
 @AllArgsConstructor
