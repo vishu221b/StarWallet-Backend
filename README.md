@@ -25,10 +25,10 @@ Wallet Types:
 
 <u>Swagger Documentation</u>
 
-url - http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+Swagger documentation for the REST APIs is available at http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
 
-![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-1.png)
+![OpenAPI1](https://github.com/vishu221b/StarWallet-Backend/blob/master/OpenAPI-Readme/OpenAPI-1.png?raw=true)
 
-![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-2.png)
+![OpenAPI2](https://github.com/vishu221b/StarWallet-Backend/blob/master/OpenAPI-Readme/OpenAPI-2.png?raw=true)
 
-![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-3.png)
+![OpenAPI3](https://github.com/vishu221b/StarWallet-Backend/blob/master/OpenAPI-Readme/OpenAPI-3.png?raw=true)
