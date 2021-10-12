@@ -1,7 +1,5 @@
 # StarWallet-Backend
 
-Name - Star Wallet
-
 Tech Stack  - Java, Spring-Boot, JPA, H2, Mockito
 
 Description - Rest API collection for backend architecture of a real world wallet.
@@ -22,8 +20,10 @@ Wallet Types:
 - BUSINESS - Can be used to receive or withdraw funds.
 - PERSONAL - Can be used to pay and receive funds.
 
+---
 
-<u>Swagger Documentation</u>
+
+###<u>Swagger Documentation</u>
 
 Swagger documentation for the REST APIs is available at http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
 
