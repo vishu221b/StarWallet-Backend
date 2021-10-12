@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class User extends BaseEntity{
     private UserType userType ;
 
     @Column(name = "birth_date")
+    @Past(message = "Invalid birth date. Birth date cannot be of today.")
     private Date birthDate;
 
     @Column(name = "mobile_number", unique = true)
