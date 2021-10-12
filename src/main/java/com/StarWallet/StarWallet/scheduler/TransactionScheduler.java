@@ -4,8 +4,6 @@ import com.StarWallet.StarWallet.constants.RegexConstants;
 import com.StarWallet.StarWallet.enums.TransactionStatus;
 import com.StarWallet.StarWallet.model.entity.Transaction;
 import com.StarWallet.StarWallet.repository.TransactionRepository;
-import com.StarWallet.StarWallet.repository.WalletRechargeRepository;
-import com.StarWallet.StarWallet.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,12 +19,6 @@ public class TransactionScheduler {
 
     @Autowired
     TransactionRepository transactionRepository;
-
-    @Autowired
-    WalletRepository walletRepository;
-
-    @Autowired
-    WalletRechargeRepository walletRechargeRepository;
 
     @Scheduled(cron = RegexConstants.TRANSACTION_CRON_EVERY_HOUR_TOP)
     @Transactional

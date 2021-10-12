@@ -6,7 +6,7 @@ Dockerfile
 !**/src/test/**/target/
 *.db
 logs
-
+.DS_Store
 ### STS ###
 .apt_generated
 .classpath

@@ -22,3 +22,13 @@ Wallet Types:
 - BUSINESS - Can be used to receive or withdraw funds.
 - PERSONAL - Can be used to pay and receive funds.
 
+
+<u>Swagger Documentation</u>
+
+url - http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+
+![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-1.png)
+
+![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-2.png)
+
+![alt text](https://github.com/vishu221b/StarWallet-Backend/tree/master/OpenAPI-Readme/OpenAPI-3.png)
