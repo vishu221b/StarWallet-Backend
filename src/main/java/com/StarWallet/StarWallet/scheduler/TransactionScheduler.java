@@ -1,5 +1,6 @@
 package com.StarWallet.StarWallet.scheduler;
 
+import com.StarWallet.StarWallet.constants.RegexConstants;
 import com.StarWallet.StarWallet.enums.TransactionStatus;
 import com.StarWallet.StarWallet.model.entity.Transaction;
 import com.StarWallet.StarWallet.repository.TransactionRepository;
@@ -27,10 +28,10 @@ public class TransactionScheduler {
     @Autowired
     WalletRechargeRepository walletRechargeRepository;
 
-    @Scheduled(cron = "0/10 * * * * *")
+    @Scheduled(cron = RegexConstants.TRANSACTION_CRON_EVERY_HOUR_TOP)
     @Transactional
     public void completeAllTransactions(){
-        log.info("Entering transactions scheduler.");
+        log.info("Starting transactions scheduler.");
         Collection<Transaction> incompleteTransactions = transactionRepository.findIncompleteActiveTransactions();
         Collection<Transaction> newTransactionsToSave = new ArrayList<>();
         if(null!=incompleteTransactions && incompleteTransactions.size() > 0){
@@ -52,6 +53,6 @@ public class TransactionScheduler {
             incompleteTransactions.forEach(x->x.setIsActive(Boolean.FALSE));
             log.info("Completed updating transactions.");
         }
-        log.info("Exiting transactions scheduler.");
+        log.info("Stopping transactions scheduler.");
     }
 }

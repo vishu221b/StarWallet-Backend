@@ -15,4 +15,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             nativeQuery = true
     )
     List<Transaction> findIncompleteActiveTransactions();
+
+    List<Transaction> findByParentTransactionId(Transaction transaction);
 }
