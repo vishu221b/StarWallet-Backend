@@ -13,7 +13,6 @@ public class CreateNewTransaction {
     private String payeeWalletId;
     private String receiverWalletId;
     private int paymentMode;
-    private int transactionType;
     private long amount;
     private int currencyType;
 }

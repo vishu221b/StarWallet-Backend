@@ -6,15 +6,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@ToString(callSuper = true)
+@ToString(exclude = {"addresses"})
 @Table(name = "star_wallet_user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,7 +43,7 @@ public class User extends BaseEntity{
     private String emailAddress;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Address.class, mappedBy = "user")
+    @OneToMany(targetEntity = Address.class, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
     @OneToMany(targetEntity = Wallet.class, mappedBy = "user", fetch = FetchType.EAGER)

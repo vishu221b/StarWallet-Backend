@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass

@@ -30,7 +30,7 @@ public class Address extends BaseEntity {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
 }

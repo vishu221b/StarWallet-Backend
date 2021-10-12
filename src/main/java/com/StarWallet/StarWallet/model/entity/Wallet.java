@@ -2,16 +2,16 @@ package com.StarWallet.StarWallet.model.entity;
 
 import com.StarWallet.StarWallet.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "wallet")
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"user", "transactions"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Wallet extends BaseEntity{

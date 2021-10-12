@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.id.UUIDGenerator;
 
@@ -62,7 +63,9 @@ public class Transaction extends BaseEntity{
     @PrePersist
     public void prePersist(){
         super.prePersist();
-        this.setTransactionStatus(TransactionStatus.INITIATED);
+        if(null==this.getTransactionStatus()){
+            this.setTransactionStatus(TransactionStatus.INITIATED);
+        }
     }
 
 }

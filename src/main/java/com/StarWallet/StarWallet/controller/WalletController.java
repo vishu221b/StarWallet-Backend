@@ -3,6 +3,7 @@ package com.StarWallet.StarWallet.controller;
 import com.StarWallet.StarWallet.constants.ErrorConstants;
 import com.StarWallet.StarWallet.enums.WalletType;
 import com.StarWallet.StarWallet.model.entity.Wallet;
+import com.StarWallet.StarWallet.model.exceptions.StarWalletInternalServerErrorException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceAlreadyExistsException;
 import com.StarWallet.StarWallet.model.exceptions.StarWalletResourceNotFoundException;
 import com.StarWallet.StarWallet.model.request.CreateWallet;
@@ -41,15 +42,15 @@ public class WalletController {
         if(null!=walletType1){
             wallet.setWalletType(walletType1);
         }else{
-            throw new StarWalletResourceNotFoundException(ErrorConstants.INVALID_WALLET_TYPE_ERROR, new Date().getTime());
+            throw new StarWalletResourceNotFoundException(ErrorConstants.INVALID_WALLET_TYPE_ERROR, System.currentTimeMillis());
         }
         try {
             return walletService.createNewWallet(wallet);
         } catch (DataIntegrityViolationException e){
             e.printStackTrace();
-            throw new StarWalletResourceAlreadyExistsException(ErrorConstants.USER_ALREADY_EXISTS_ERROR, new Date().getTime());
+            throw new StarWalletResourceAlreadyExistsException(ErrorConstants.USER_ALREADY_EXISTS_ERROR, System.currentTimeMillis());
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            throw new StarWalletInternalServerErrorException(e.getMessage(), System.currentTimeMillis());
         }
     }
 }
