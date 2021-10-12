@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -34,11 +35,13 @@ public class WalletRechargeScheduler {
             log.info(String.format("Updating %s wallet recharges.", walletRecharges.size()));
             walletRecharges.forEach(wr -> {
                 Collection<Transaction> transactions = transactionRepository.findByParentTransactionId(wr.getTransaction());
-                if(transactions.size() > 0 &&
-                        transactions
-                                .stream()
-                                .anyMatch(x -> x.getTransactionStatus().equals(TransactionStatus.COMPLETED))){
+                Optional<Transaction> txn = transactions
+                        .stream()
+                        .filter(x -> x.getTransactionStatus().equals(TransactionStatus.COMPLETED))
+                        .findFirst();
+                if(transactions.size() > 0 && txn.isPresent()){
                     wr.setRechargeStatus(RechargeStatus.SUCCESSFUL);
+                    wr.setTransaction(txn.get());
                 }
             });
             log.info(String.format("Updated %s wallet recharges.", walletRecharges.size()));
