@@ -9,4 +9,5 @@ public class ErrorConstants {
     public static final String WALLET_NOT_FOUND_ERROR = "No wallets found.";
     public static final String INVALID_WALLET_TYPE_ERROR = "Invalid wallet type.";
     public static final String WALLET_WITH_TYPE_ALREADY_EXISTS_ERROR = "%s wallet already exists for the user. User can create only one Wallet per type.";
+    public static final String RECEIVER_WALLET_CANNOT_BE_EMPTY = "Receiver wallet cannot be empty while making transaction.";
 }

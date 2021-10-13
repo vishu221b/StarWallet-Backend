@@ -34,6 +34,9 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction receiversTransaction = new Transaction();
         Wallet payeeWallet = walletService.getByWalletId(createNewTransaction.getPayeeWalletId());
         Wallet receiverWallet = walletService.getByWalletId(createNewTransaction.getReceiverWalletId());
+        if(null==receiverWallet){
+            throw new StarWalletInvalidRequestException(ErrorConstants.RECEIVER_WALLET_CANNOT_BE_EMPTY, System.currentTimeMillis());
+        }
         Long amount = createNewTransaction.getAmount();
         long balanceDifference = 0L;
         if(null!=payeeWallet){
