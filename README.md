@@ -23,7 +23,7 @@ Wallet Types:
 ---
 
 
-###<u>Swagger Documentation</u>
+### <u>Swagger Documentation</u>
 
 Swagger documentation for the REST APIs is available at http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
 
